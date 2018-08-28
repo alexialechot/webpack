@@ -1,12 +1,20 @@
 const {
 	resolve
 } = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const webpack = require('webpack')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+
+/** Host Port and proxy */
+const HOST = process.env.HOST || 'localhost'
+const PORT = process.env.PORT || 9000
+const PROXY = `http://${HOST}:${PORT}`
 
 let config = {
 	mode: 'none',
+	watch: true,
+
 	entry: {
 		app: './src/index.js'
 	},
@@ -20,8 +28,8 @@ let config = {
 	devServer: {
 		contentBase: './dist',
 		hot: true,
-		host: 'localhost',
-		port: 9000
+		host: HOST,
+		port: PORT
 	},
 
 	/** module -> rule */
@@ -46,6 +54,11 @@ let config = {
 			myPageHeader: 'Webpack base configuration',
 			filename: 'index.html',
 			template: './src/templates/index.html'
+		}),
+		new BrowserSyncPlugin({
+			host: HOST,
+			port: PORT,
+			proxy: PROXY
 		}),
 		new webpack.HotModuleReplacementPlugin()
 	]
