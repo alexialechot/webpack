@@ -1,6 +1,9 @@
 const {
 	resolve
 } = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 let config = {
 	mode: 'none',
@@ -8,9 +11,20 @@ let config = {
 		app: './src/index.js'
 	},
 	output: {
-		filename: '[name].bundle.js',
-		path: resolve(__dirname, './dist')
+		filename: 'assets/js/[name].bundle.js',
+		path: resolve(__dirname, './dist/assets/')
 	},
+
+	/** DevTools */
+	devtool: 'inline-source-map',
+	devServer: {
+		contentBase: './dist',
+		hot: true,
+		host: 'localhost',
+		port: 9000
+	},
+
+	/** module -> rule */
 	module: {
 		rules: [{
 			test: /\.css$/,
@@ -22,8 +36,19 @@ let config = {
 			test: /\.(woff|woff2|eot|ttf|otf)$/,
 			use: ['file-loader']
 		}]
-	}
+	},
 
+	/** plugin Webpack */
+	plugins: [
+		new CleanWebpackPlugin(['./dist/assets/']),
+		new HtmlWebpackPlugin({
+			title: 'My Awesome application',
+			myPageHeader: 'Hello World',
+			filename: 'index.html',
+			template: './src/templates/index.html'
+		}),
+		new webpack.HotModuleReplacementPlugin()
+	]
 }
 
 module.exports = config
