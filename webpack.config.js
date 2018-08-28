@@ -42,8 +42,8 @@ let config = {
 	plugins: [
 		new CleanWebpackPlugin(['./dist/assets/']),
 		new HtmlWebpackPlugin({
-			title: 'My Awesome application',
-			myPageHeader: 'Hello World',
+			title: 'Webpack Base',
+			myPageHeader: 'Webpack base configuration',
 			filename: 'index.html',
 			template: './src/templates/index.html'
 		}),

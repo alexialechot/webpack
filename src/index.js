@@ -1,3 +1,3 @@
 import './css/style.css'
 
-alert('hello')
+console.log('this is running')
