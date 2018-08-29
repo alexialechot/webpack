@@ -1,28 +1,17 @@
-module.exports = {
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
-    "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ]
-    }
+export default {
+	env: {
+		es6: true,
+		node: true
+	},
+	extends: 'eslint:recommended',
+	parserOptions: {
+		ecmaVersion: 2016,
+		sourceType: 'module'
+	},
+	rules: {
+		indent: [ 'error', 4 ],
+		'linebreak-style': [ 'error', 'unix' ],
+		quotes: [ 'error', 'single' ],
+		semi: [ 'error', 0 ]
+	}
 };

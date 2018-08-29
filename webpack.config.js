@@ -20,7 +20,7 @@ let config = {
 	},
 	output: {
 		filename: 'assets/js/[name].bundle.js',
-		path: resolve(__dirname, './dist/assets/')
+		path: resolve(__dirname, './dist/')
 	},
 
 	/** DevTools */
@@ -38,8 +38,14 @@ let config = {
 			test: /\.css$/,
 			use: ['style-loader', 'css-loader']
 		}, {
-			test: /\.(png|svg|jpg|jpeg|gif)$/,
-			use: ['file-loader']
+			test: /\.(png|svg|jp(e*)g|gif)$/,
+			use: [{
+				loader: 'url-loader',
+				options: {
+					limit: 9000,
+					name: 'assets/img/[name].[ext]'
+				}
+			}]
 		}, {
 			test: /\.(woff|woff2|eot|ttf|otf)$/,
 			use: ['file-loader']
@@ -50,8 +56,8 @@ let config = {
 	plugins: [
 		new CleanWebpackPlugin(['./dist/assets/']),
 		new HtmlWebpackPlugin({
-			title: 'Webpack Base',
-			myPageHeader: 'Webpack base configuration',
+			title: 'Webpack Base config',
+			myPageHeader: 'This webpack base configuration',
 			filename: 'index.html',
 			template: './src/templates/index.html'
 		}),
